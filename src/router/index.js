@@ -17,8 +17,8 @@ const routes = [
   },
   {
     path: '/guardians/:id/urgencies',
-    name: 'Urgencies',
-    component: Home
+    name: 'urgencies',
+    component: () => import('../views/urgencies')
   }
 ]
 

@@ -11,16 +11,21 @@
         <v-btn text to="/home">HOME</v-btn>
         <v-btn text to="/urgencies">URGENCIES</v-btn>
       </v-toolbar-items>
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+
+      {{ currentUser }}
+
     </v-toolbar>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: "nav-bar"
+  name: "nav-bar",
+  computed: {
+    currentUser() {
+      return this.$store.state.currentUser
+    }
+  }
 }
 </script>
 

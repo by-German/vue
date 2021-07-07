@@ -1,11 +1,20 @@
 <template>
   <v-app style="margin: 50px" id="home">
+
     <v-data-table
         :headers="headers"
         :items="guardians"
         class="elevation-5"
+        :search="search"
+        :custom-filter="filter"
     >
+
       <template v-slot:top>
+        <v-text-field
+            v-model="search"
+            label="Search"
+            class="mx-4"
+        ></v-text-field>
         <v-toolbar
             flat
         >
@@ -16,6 +25,7 @@
               vertical
           ></v-divider>
           <v-spacer></v-spacer>
+
           <v-dialog
               v-model="dialog"
               max-width="500px"
@@ -173,6 +183,7 @@ import GuardiansApiService from '@/services/guardians-api.service'
 export default {
   name: 'Home',
   data: () =>({
+    search: '',
     dialog: false,
     dialogDelete: false,
     headers: [
@@ -226,16 +237,27 @@ export default {
   },
 
   methods: {
+    filter (value, search) {
+      return value != null &&
+          search != null &&
+          typeof value === 'string' &&
+          value.toString().toLocaleLowerCase().indexOf(search) !== -1
+    },
+
     initialize () {
       this.guardians = []
       GuardiansApiService.getAll().then(response => {
-        console.log(response.data)
         this.guardians = response.data
       })
     },
 
     navigateToGuardian(item) {
+      let id = item.id
       console.log(item)
+      this.$router.push({
+        name: 'urgencies',
+        params: { id: id }
+      });
     },
 
     editItem (item) {
@@ -274,11 +296,16 @@ export default {
     save () {
       if (this.editedItem.id > -1) {
         let id = this.editedItem.id
-        GuardiansApiService.update(id, this.editedItem)
+        GuardiansApiService.update(id, this.editedItem).then(result => {
+          console.log(result)
+          this.initialize()
+        })
       } else {
-        GuardiansApiService.create(this.editedItem)
+        GuardiansApiService.create(this.editedItem).then(result => {
+          console.log(result)
+          this.initialize()
+        })
       }
-      this.initialize()
       this.close()
     },
   },
