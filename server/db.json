@@ -1,0 +1,41 @@
+{
+  "guardians": [
+    {
+      "username": "La Rata",
+      "email": "rodrigo@gmail.com",
+      "firstname": "Rodrigo",
+      "lastname": "Elratas",
+      "gender": "male",
+      "address": "Av siempre viva",
+      "id": 4
+    },
+    {
+      "username": "asdasd",
+      "email": "asdas",
+      "firstname": "dasd",
+      "lastname": "sadasd",
+      "gender": "sadas",
+      "address": "dasdasd",
+      "id": 5
+    },
+    {
+      "username": "sadasd",
+      "email": "sadas",
+      "firstname": "dasdasd",
+      "lastname": "asdas",
+      "gender": "",
+      "address": "",
+      "id": 6
+    },
+    {
+      "username": "Nsadasdasd",
+      "email": "sdasdas",
+      "firstname": "",
+      "lastname": "dasdasdasd",
+      "gender": "",
+      "address": "",
+      "id": 8
+    }
+  ],
+  "urgencies": []
+}
